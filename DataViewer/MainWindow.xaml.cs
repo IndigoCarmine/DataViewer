@@ -38,7 +38,7 @@ namespace DataViewer
             {
                 Inputs = customInputBindings,
             };
-            WpfPlot1.Plot.ScaleFactor = 3;
+            WpfPlot1.Plot.ScaleFactor = 2;
             WpfPlot1.Plot.FigureBackground = ScottPlot.Colors.Transparent;
             WpfPlot1.Plot.DataBackground = ScottPlot.Colors.Transparent;
             WpfPlot1.Plot.Style.ColorAxes(ScottPlot.Color.Gray(255));
@@ -64,7 +64,7 @@ namespace DataViewer
             {
                 if (File.Exists(file))
                 {
-                   loader = new TSVFileLoader(file, false);
+                   loader = new FtIrFileLoader(file);
 
                     var data = loader.LoadValue();
                     if (data == null) return;
@@ -102,6 +102,16 @@ namespace DataViewer
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             WpfPlot1.Plot.Style.AxisFrame(1, 0, 1, 0);
+            //WpfPlot1.Plot.Style.AxisFrame(0, 0, 1, 0);
+
+            WpfPlot1.Plot.ScaleFactor = 3;
+            ScottPlot.Color backgroundGray = new ScottPlot.Color(35, 35, 35);
+            WpfPlot1.Plot.FigureBackground = backgroundGray;
+            WpfPlot1.Plot.DataBackground = backgroundGray;
+
+            //invert x axis
+
+
             WpfPlot1.Refresh();
         }
 
@@ -117,6 +127,19 @@ namespace DataViewer
             {
                 NearestPoint.Text = nearest.Value.X.ToString() + ":" + nearest.Value.Y.ToString();
             }
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
+            int width = (int)WpfPlot1.ActualWidth;
+            int height = (int)WpfPlot1.ActualHeight;
+            WpfPlot1.Plot.SaveSvg(
+                System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\DataView_Output.svg"
+                , width,height);
+
+            MessageBox.Show("Finish Saving");
+
         }
     }
 }

@@ -7,7 +7,9 @@
         xmlns:local="clr-namespace:DataViewer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <Grid Background="Black">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="50"/>
@@ -21,6 +23,7 @@
         <ScottPlot:WpfPlot x:Name="WpfPlot1" DragDrop.Drop="Grid_Drag" AllowDrop="True" MouseMove="WpfPlot1_MouseMove" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <Slider x:Name="RangeSlider" IsSelectionRangeEnabled="True" ValueChanged="Range_ValueChanged" Grid.Column ="0"  Grid.Row ="1" Grid.RowSpan="2"/>
         <Button x:Name="Refresh" Click="Refresh_Click" Grid.Column="1" Grid.Row="1" />
+        <Button x:Name="Save" Click="Save_Click" Grid.Column="1" Grid.Row="2" />
         <StackPanel Background="White" Grid.Column="0" Grid.Row="2">
             <TextBlock x:Name="NearestPoint"/>
         </StackPanel>
